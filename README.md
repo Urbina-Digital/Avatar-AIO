@@ -1,7 +1,10 @@
-   ╔══════╗  AI AVATAR  ╔══════╗
-   ║ AIO  ║  PLATFORM   ║ 2025 ║
-   ╚══════╝  by Urbina  ╚══════╝
-   ════[ DIGITAL ]═══════
+   ╔──────────────────────╗
+   ╣        AI AVATAR     ╣
+   ╣           AIO        ╣
+   ╣        PLATFORM      ╣
+   ╣          2025        ╣
+   ╚──────────────────────╝
+        by Urbina Digital
 
 # AI Avatar Platform (Avatar_AIO)
 
