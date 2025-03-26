@@ -1,0 +1,217 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Avatar Platform - Chatbox Interface</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
+        }
+        
+        .chatbox-container {
+            width: 100%;
+            height: 300px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-history {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .user-message {
+            background-color: #6200EE;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .avatar-message {
+            background-color: #2A2A2A;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 0.7em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+        
+        .input-area {
+            display: flex;
+            padding: 10px;
+            background-color: #2A2A2A;
+            border-top: 1px solid #333333;
+        }
+        
+        .text-input {
+            flex-grow: 1;
+            background-color: #3A3A3A;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.5);
+        }
+        
+        .send-button, .mic-button {
+            background-color: #6200EE;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .send-button:hover, .mic-button:hover {
+            background-color: #7722FF;
+        }
+        
+        .mic-button {
+            margin-right: 10px;
+        }
+        
+        .chat-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #1E1E1E;
+        }
+        
+        .stealth-toggle {
+            display: flex;
+            align-items: center;
+            color: #AAAAAA;
+            font-size: 0.9em;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin: 0 10px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #3A3A3A;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #6200EE;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        
+        .clear-button {
+            background: none;
+            border: none;
+            color: #AAAAAA;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .clear-button:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbox-container">
+        <div class="chat-controls">
+            <div class="stealth-toggle">
+                <span>Stealth Mode</span>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span>Text Only</span>
+            </div>
+            <button class="clear-button">Clear Chat</button>
+        </div>
+        
+        <div class="chat-history">
+            <div class="message avatar-message">
+                Hello! I'm your personalized AI avatar. How can I assist you today?
+                <div class="message-time">10:30 AM</div>
+            </div>
+            
+            <div class="message user-message">
+                Can you tell me about yourself?
+                <div class="message-time">10:31 AM</div>
+            </div>
+            
+            <div class="message avatar-message">
+                I'm a customized AI avatar created based on your preferences. I can chat with you, perform various actions, and respond in a style that matches your provided dialog samples.
+                <div class="message-time">10:31 AM</div>
+            </div>
+        </div>
+        
+        <div class="input-area">
+            <button class="mic-button" title="Voice Input">🎤</button>
+            <input type="text" class="text-input" placeholder="Type your message...">
+            <button class="send-button" title="Send Message">➤</button>
+        </div>
+    </div>
+</body>
+</html>
+```

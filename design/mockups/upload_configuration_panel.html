@@ -1,0 +1,304 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Avatar Platform - Upload & Configuration Panel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
+        }
+        
+        .config-panel-container {
+            width: 100%;
+            height: 500px;
+            background-color: #1E1E1E;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .tab-navigation {
+            display: flex;
+            background-color: #2A2A2A;
+            border-bottom: 1px solid #333333;
+        }
+        
+        .tab-button {
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: #AAAAAA;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab-button.active {
+            color: #FFFFFF;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #6200EE;
+        }
+        
+        .tab-content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .upload-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #03DAC6;
+        }
+        
+        .upload-area {
+            border: 2px dashed #444444;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            background-color: #2A2A2A;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #6200EE;
+            background-color: #333333;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #6200EE;
+        }
+        
+        .upload-text {
+            margin-bottom: 15px;
+        }
+        
+        .browse-button {
+            background-color: #6200EE;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .browse-button:hover {
+            background-color: #7722FF;
+        }
+        
+        .upload-requirements {
+            font-size: 0.8em;
+            color: #AAAAAA;
+            margin-top: 15px;
+        }
+        
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #333333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            width: 70%;
+            background-color: #03DAC6;
+            border-radius: 4px;
+        }
+        
+        .settings-section {
+            margin-top: 30px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333333;
+        }
+        
+        .setting-label {
+            flex-grow: 1;
+        }
+        
+        .setting-description {
+            font-size: 0.8em;
+            color: #AAAAAA;
+            margin-top: 3px;
+        }
+        
+        .slider-container {
+            width: 150px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 5px;
+            background: #333333;
+            outline: none;
+            -webkit-appearance: none;
+            border-radius: 5px;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #6200EE;
+            cursor: pointer;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cancel-button {
+            background-color: transparent;
+            color: #AAAAAA;
+            border: 1px solid #444444;
+        }
+        
+        .cancel-button:hover {
+            background-color: #2A2A2A;
+            color: white;
+        }
+        
+        .train-button {
+            background-color: #03DAC6;
+            color: black;
+        }
+        
+        .train-button:hover {
+            background-color: #00EAD3;
+        }
+    </style>
+</head>
+<body>
+    <div class="config-panel-container">
+        <div class="tab-navigation">
+            <button class="tab-button active">Appearance</button>
+            <button class="tab-button">Voice</button>
+            <button class="tab-button">Communication</button>
+            <button class="tab-button">Settings</button>
+        </div>
+        
+        <div class="tab-content">
+            <div class="upload-section">
+                <h3 class="section-title">Upload Appearance Data</h3>
+                <div class="upload-area">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Drag and drop your LoRA model or image dataset here</div>
+                    <button class="browse-button">Browse Files</button>
+                    <div class="upload-requirements">
+                        Supported formats: .safetensors, .ckpt, .pt for LoRA models<br>
+                        Or .jpg, .png image datasets (minimum 10 images recommended)
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Uploading: avatar_dataset.zip</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="section-title">Appearance Settings</h3>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <div>Avatar Style</div>
+                        <div class="setting-description">Choose between realistic or stylized appearance</div>
+                    </div>
+                    <select style="background-color: #333333; color: white; padding: 5px; border: none; border-radius: 4px;">
+                        <option>Realistic</option>
+                        <option>Anime</option>
+                        <option>Cartoon</option>
+                        <option>Stylized</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <div>Detail Level</div>
+                        <div class="setting-description">Higher detail requires more processing power</div>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="100" value="70" class="slider">
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <div>Generate Additional Poses</div>
+                        <div class="setting-description">Create variations from uploaded images</div>
+                    </div>
+                    <label class="toggle-switch" style="position: relative; display: inline-block; width: 40px; height: 20px;">
+                        <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                        <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #6200EE; transition: .4s; border-radius: 20px;">
+                            <span style="position: absolute; content: ''; height: 16px; width: 16px; right: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-button cancel-button">Cancel</button>
+                <button class="action-button train-button">Train Model</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+```
